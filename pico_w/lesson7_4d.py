@@ -3,13 +3,14 @@ from machine import ADC,Pin,Timer,RTC
 import time
 import urequests
 
+led25 = Pin("LED",Pin.OUT)
 
 connect()
 adc = ADC(4)     # create ADC object on ADC pin,最後一個,溫度
 conversion_factor = 3.3/65535
 
 start_time = 0
-duration = 60
+duration = 300
 
 def alert(temp):
     
@@ -39,9 +40,10 @@ def second1(t):
     # Typically, Vbe = 0.706V at 27 degrees C, with a slope of -1.721mV (0.001721) per degree. 
     celsius = 27 - (reading_v-0.706) / 0.001721
     print(celsius)
+    led25.toggle()
     if celsius >= 25:
         alert(celsius)
         
     
 tim1 = Timer()
-tim1.init(period=1000, callback=second1)
+tim1.init(period=10000, callback=second1)
