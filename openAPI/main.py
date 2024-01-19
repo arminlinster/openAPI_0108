@@ -1,9 +1,9 @@
 from typing import Union
-
+import redis
 from fastapi import FastAPI
 
 app = FastAPI()
-
+redis_conn = redis.Redis.from_url(os.environ.get('REDIS_HOST_PASSWORD'))
 
 @app.get("/")
 def read_root():
