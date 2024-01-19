@@ -8,7 +8,7 @@ redis_conn = redis.Redis.from_url(os.environ.get('REDIS_HOST_PASSWORD'))
 
 @app.get("/")
 def read_root():
-    redis_conn.incrby("test123",2)
+    redis_conn.incrby("test123",1)
     return {"Hello": "ArminLin"}
 
 
