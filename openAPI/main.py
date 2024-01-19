@@ -8,8 +8,8 @@ redis_conn = redis.Redis.from_url(os.environ.get('REDIS_HOST_PASSWORD'))
 
 @app.get("/")
 def read_root():
-    redis_conn.incrby("test123",1)
-    return {"Hello": "ArminLin"}
+    counter = redis_conn.incrby("test123",1)
+    return {"Counter": counter}
 
 
 @app.get("/items/{item_id}")
