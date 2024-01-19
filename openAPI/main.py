@@ -1,4 +1,5 @@
 from typing import Union
+import os
 import redis
 from fastapi import FastAPI
 
