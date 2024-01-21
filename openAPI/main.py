@@ -16,10 +16,20 @@ def read_root():
 def counter(c:int):
     counter = redis_conn.incr('test123',c)
     return {"Counter": counter}
-@app.get("/temperature/{d}")
-def temperature(d:float):
-    counter = redis_conn.incr('test123',c)
-    return {"d": d}
+    
+# 接收pico_w傳來的資料(溫度、時間)
+@app.get("/temperature/{celsius}/{time}")
+def save_temperature(celsius:float, time:str):
+    redis_conn.set('board:temperature', celsius)
+    redis_conn.set('board:time', time)
+    return 'Save successfully'
+
+# 顯示溫度頁
+@app.get("/temperature")
+def read_temperature():
+    celsius = redis_conn.get('board:temperature')
+    time = redis_conn.get('board:time')
+    return {"溫度": celsius, "時間": time}
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str | None = None):
