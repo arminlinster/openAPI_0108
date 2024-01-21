@@ -16,6 +16,10 @@ def read_root():
 def counter(c:int):
     counter = redis_conn.incr('test123',c)
     return {"Counter": counter}
+@app.get("/temperature/{d}")
+def temperature(d:float):
+    counter = redis_conn.incr('test123',c)
+    return {"d": d}
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str | None = None):
