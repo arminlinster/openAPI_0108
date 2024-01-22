@@ -44,7 +44,7 @@ fake_items_db = [{"item_name" : "foo"} , {"item_name" : "poo"} , {"item_name" : 
 #async def read_item(skip: int = 0 , limit: int = 10):
 #    return fake_items_db[ skip : skip + limit]
 
-@app.get("pico_w/{date}")
+@app.get("/pico_w/{date}")
 def read_item(date:str,address:str,celsius:float):
 #def read_item(date:str,address:str,celsius:float:0.0):
     print(f"日期:{date}")
