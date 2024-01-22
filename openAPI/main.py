@@ -1,4 +1,4 @@
-from typing import Union
+from  typing import Union
 from fastapi import FastAPI
 import redis
 import os
@@ -19,20 +19,6 @@ def read_root():
 def counter():
     counter = redis_conn.incr('temp:incrNum', 1)
     return {"Counter": counter}
-    
-# 接收pico_w傳來的資料(溫度、時間)
-@app.get("/temperature/{celsius}/{time}")
-def save_temperature(celsius:float, time:str):
-    redis_conn.set('board:temperature', celsius)
-    redis_conn.set('board:time', time)
-    return 'Save successfully'
-
-# 顯示溫度頁
-@app.get("/temperature")
-def read_temperature():
-    celsius = redis_conn.get('board:temperature')
-    time = redis_conn.get('board:time')
-    return {"溫度": celsius, "時間": time}
 
 @app.get("/temperature/{celsius}")
 def pico_temp(celsius: float):
@@ -43,3 +29,17 @@ def pico_temp(celsius: float):
 def now_temp():
     celsius = redis_conn.get('board:temp')
     return {"溫度": celsius}
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str | None = None):
+    return {"item_id": item_id, "q": q}
+
+@app.get("/items/{date}/{celsius}")
+async def get_item(date:str,celsius:float):
+    print(f"日期:{date}")
+    print(f"溫度:celsius")
+    return{"date":date,"celsius":celsius}
+fake_items_db = [{"item_name" : "foo"} , {"item_name" : "poo"} , {"item_name" : "Too"}]
+
+@app.get("/items/")
+async def read_item(skip: int = 0 , limit: int = 10):
+    return fake_items_db[ skip : skip + limit]
