@@ -44,7 +44,7 @@ while True:
                 
                 is_press = False
                 
-                url_str = f'https://自已的網址/pico_w/{currentTime}?address=chicken_KFC&celsius={temperature}&light={light}'
+                url_str = f'https://openapi-0119.onrender.com/pico_w/{currentTime}?address=chicken_KFC&celsius={temperature}&light={light}'
                 try:
                     response = urequests.get(url_str)
                     pass
