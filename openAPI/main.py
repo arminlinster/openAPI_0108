@@ -44,10 +44,10 @@ fake_items_db = [{"item_name" : "foo"} , {"item_name" : "poo"} , {"item_name" : 
 #async def read_item(skip: int = 0 , limit: int = 10):
 #    return fake_items_db[ skip : skip + limit]
 
-@app.get("/pico_w/{date}")
-def read_item(date:str,address:str,celsius:float):
-#def read_item(date:str,address:str,celsius:float:0.0):
+app.get("/pico_w/{date}")
+async def read_item(date:str ,address:str,celsius:float,light:float):
     print(f"日期:{date}")
-    print(f"地點:{address}")
-    print(f"溫度:{celsius}")
-    return{"date":date,"address":address,"celsius":celsius}
+    print(f"位置:{address}")
+    print(f"攝氏:{celsius}")
+    print(f"光線:{light}")
+    return {"狀態":"儲存成功1"}
