@@ -9,6 +9,7 @@ celsius=27
 load_dotenv()
 redis_conn = redis.Redis.from_url(os.environ.get('REDIS_HOST_PASSWORD'))
 redis_conn.set('board:temp', celsius)
+#redis_conn.set('temp:incrNum', celsius)
 
 app = FastAPI()
 
